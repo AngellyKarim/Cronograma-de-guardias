@@ -1,0 +1,60 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fef6fb;
+  margin: 0;
+  padding: 1rem;
+  color: #444;
+}
+
+h1 {
+  text-align: center;
+  color: #d16ba5;
+  font-size: 1.8em;
+}
+
+.tabla-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 900px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 0.7rem;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+th {
+  background-color: #fde2ff;
+  color: #5e548e;
+  position: sticky;
+  top: 0;
+}
+
+td {
+  background-color: #fce8f0;
+  transition: background-color 0.3s, text-decoration 0.3s;
+}
+
+td.checked {
+  background-color: #d0f0fd;
+  text-decoration: line-through;
+  color: #888;
+}
+
+tr:nth-child(even) td {
+  background-color: #f9f2fc;
+}
+
+@media (max-width: 768px) {
+  table {
+    font-size: 0.75em;
+  }
+}
