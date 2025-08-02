@@ -1,60 +1,72 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #fef6fb;
+  background-color: #fff0f5; /* rosado pastel */
   margin: 0;
-  padding: 1rem;
-  color: #444;
+  padding: 20px;
+  color: #333;
 }
 
 h1 {
   text-align: center;
-  color: #d16ba5;
-  font-size: 1.8em;
+  color: #b46b9c; /* morado pastel */
+  margin-bottom: 30px;
+  font-size: 28px;
 }
 
-.tabla-container {
+.contenedor {
+  max-width: 100%;
   overflow-x: auto;
-  margin-top: 1rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(180, 107, 156, 0.3);
 }
 
 table {
-  border-collapse: collapse;
   width: 100%;
-  min-width: 900px;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
 th, td {
-  border: 1px solid #ddd;
-  text-align: center;
-  padding: 0.7rem;
-  font-size: 0.9em;
-  cursor: pointer;
+  border: 1px solid #eac6f3;
+  padding: 12px;
+  text-align: left;
+  vertical-align: top;
+  font-size: 14px;
+  background-color: #fef9fd; /* blanco-rosado pastel */
 }
 
 th {
-  background-color: #fde2ff;
-  color: #5e548e;
+  background-color: #d8c7ff; /* celeste-lila pastel */
+  color: #4a3c59;
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 
-td {
-  background-color: #fce8f0;
-  transition: background-color 0.3s, text-decoration 0.3s;
-}
-
-td.checked {
-  background-color: #d0f0fd;
-  text-decoration: line-through;
-  color: #888;
+td:first-child {
+  background-color: #ffe3ec; /* rosado claro para horas */
+  font-weight: bold;
+  color: #5c4b51;
+  width: 100px;
 }
 
 tr:nth-child(even) td {
-  background-color: #f9f2fc;
+  background-color: #f7f0fa; /* alternancia suave */
 }
 
-@media (max-width: 768px) {
+tr:hover td {
+  background-color: #fbefff; /* hover pastel suave */
+}
+
+/* Responsive horizontal scroll */
+@media screen and (max-width: 768px) {
   table {
-    font-size: 0.75em;
+    font-size: 13px;
+  }
+
+  td, th {
+    padding: 8px;
   }
 }
