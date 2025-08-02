@@ -1,170 +1,182 @@
-const cronogramaPorDia = {
-  "Domingo 03/08": {
-    "07:00 a.m.": "Llegada, desayuno personal, bajar a Rosa al comedor",
-    "08:00 a.m.": "Desayuno residentes (panes, huevo a Cecilia y Adelina)",
-    "08:15 a.m.": "Cambio de pañal y chata a Adelina si deposición",
-    "09:00 a.m.": "Cambio de pañal a Adelina si no se baña",
-    "10:00 a.m.": "Baño a Cecilia",
-    "11:30 a.m.": "Pedir segundo especial para Cecilia y dieta Adelina",
-    "12:00 p.m.": "Almuerzo (Cecilia sopa en vaso, Iris y Dilma bajan)",
-    "01:00 p.m.": "Ayudar a Rosa a comer, subir comida para Dora",
-    "03:00 p.m.": "Dar comida licuada a Dora",
-    "04:30 p.m.": "Preparar cena, revisar pisos",
-    "05:00 p.m.": "Cena",
-    "07:00 p.m.": "Oxígeno a Dora (1%), 2 puffs a Adelina",
-    "08:15 p.m.": "Cambio de pañal y chata a Adelina",
-    "10:00 p.m.": "Luces apagadas, descanso hasta medianoche"
-  },
-  "Lunes 04/08": {
-    "12:00 a.m.": "Revisión de pacientes, rondas",
-    "04:00 a.m.": "Cambio de pañal a Dilma, lavado perineal a Dora y Adelina",
-    "04:30 a.m.": "Tomar signos vitales a Adelina, Dilma, Iris y paciente frente",
-    "06:00 a.m.": "Bañarse, sacar basura, anotar signos si falta",
-    "07:00 a.m.": "Desayuno personal, bajar a Rosa",
-    "08:00 a.m.": "Desayuno residentes",
-    "08:15 a.m.": "Chata y pañal a Adelina",
-    "09:30 a.m.": "Baño a Iris (alternando con Dilma)",
-    "11:30 a.m.": "Pedir segundo y dieta como siempre",
-    "12:00 p.m.": "Almuerzo",
-    "03:00 p.m.": "Dar comida licuada a Dora",
-    "05:00 p.m.": "Cena",
-    "08:15 p.m.": "Chata y pañal Adelina",
-    "10:00 p.m.": "Luces apagadas"
-  },
-  // Las demás fechas seguirán aquí...
+const fechasTurno = [
+  "Dom 3 ago", "Lun 4 ago", "Mar 5 ago",
+  "Jue 7 ago", "Vie 8 ago", "Sáb 9 ago",
+  "Lun 11 ago", "Mar 12 ago", "Mié 13 ago",
+  "Vie 15 ago", "Sáb 16 ago", "Dom 17 ago"
+];
+
+const horasDelDia = [
+  "12 a.m", "1 a.m", "2 a.m", "3 a.m", "4 a.m", "5 a.m", "6 a.m",
+  "7 a.m", "8 a.m", "9 a.m", "10 a.m", "11 a.m",
+  "12 p.m", "1 p.m", "2 p.m", "3 p.m", "4 p.m", "5 p.m", "6 p.m",
+  "7 p.m", "8 p.m", "9 p.m", "10 p.m", "11 p.m"
+];
+
+const tareasPorHora = {
+  "4 a.m": [
+    "Cambio de pañal a Dilma",
+    "Lavado perineal y cambio de pañal a Dora",
+    "Lavado y cambio de pañal a Adelina",
+    "Tomar signos vitales a Adelina, Iris, Dilma y señora frente a Adelina",
+    "Medicaciones en ayunas"
+  ],
+  "5 a.m": [
+    "Sacar basura",
+    "Revisar entorno segundo piso"
+  ],
+  "6 a.m": [
+    "Bañarme y alistarme para el día",
+    "Preparar ropa de trabajo"
+  ],
+  "7 a.m": [
+    "Dejar mis cosas",
+    "Desayunar",
+    "Llevar al baño a Rosa",
+    "Colocar a Rosa en el comedor"
+  ],
+  "8 a.m": [
+    "Preparar desayunos",
+    "Servir desayuno a residentes",
+    "Desayuno especial para Adelina y Cecilia",
+    "Cambio de pañal y chata a Adelina si deposición"
+  ],
+  "9 a.m": [
+    "Cambio de pañal a Adelina si no se le baña",
+    "Dar licuado a Dora",
+    "Bañar a Cecilia",
+    "Bañar a Iris o Dilma alternadamente si no es día de Adelina"
+  ],
+  "9:30 a.m": [
+    "Bañar a Adelina (solo martes y viernes)"
+  ],
+  "10 a.m": [
+    "Terminar baños",
+    "Revisar ropa limpia de pacientes"
+  ],
+  "11 a.m": [
+    "Dar merienda",
+    "Ayudar a servir jugos",
+    "Alistar almuerzo",
+    "Preguntar si Iris y Dilma desean bajar"
+  ],
+  "11:30 a.m": [
+    "Pedir dieta especial para Cecilia",
+    "Pedir dieta especial para Adelina",
+    "Licuar y colar comida para Dora"
+  ],
+  "12 p.m": [
+    "Servir almuerzo",
+    "Servir sopa en vaso a Cecilia",
+    "Dar comida a pacientes que almuerzan en cama"
+  ],
+  "1 p.m": [
+    "Almuerzo personal",
+    "Llevar a Rosa al baño",
+    "Colocar a Rosa en el sillón"
+  ],
+  "2 p.m": [
+    "Descanso breve"
+  ],
+  "3 p.m": [
+    "Dar comida licuada a Dora"
+  ],
+  "4 p.m": [
+    "Empezar preparación de cena",
+    "Revisión del entorno segundo piso"
+  ],
+  "5 p.m": [
+    "Servir la cena",
+    "Colocar pañal a Rosa",
+    "Aplicar gaseobet, lágrimas, timolol, mentol a Rosa"
+  ],
+  "6 p.m": [
+    "Acompañar a pacientes a sus cuartos",
+    "Revisión general"
+  ],
+  "7 p.m": [
+    "2 puffs y lágrimas artificiales a Adelina",
+    "Colocar oxígeno (balón) 2% a Adelina"
+  ],
+  "8 p.m": [
+    "Cambio de pañal y chata a Adelina si deposición"
+  ],
+  "9 p.m": [
+    "Conversar con Raulino y Blanca",
+    "Verificar televisores apagados"
+  ],
+  "10 p.m": [
+    "Apagar luces",
+    "Descansar hasta las 12 a.m"
+  ],
+  "12 a.m": [
+    "Revisión general de pacientes"
+  ],
+  "1 a.m": [
+    "Revisión general"
+  ],
+  "2 a.m": [
+    "Revisión general"
+  ],
+  "3 a.m": [
+    "Revisión general"
+  ]
 };
+const cronograma = document.getElementById("cronograma");
 
-const fechas = Object.keys(cronogramaPorDia);
+function crearEncabezado() {
+  const filaHeader = document.createElement("div");
+  filaHeader.classList.add("fila");
 
-function generarTabla() {
-  const tabla = document.getElementById("tablaCronograma");
-  const encabezado = tabla.insertRow();
-  encabezado.insertCell().textContent = "Hora";
-  fechas.forEach(fecha => {
-    const celda = encabezado.insertCell();
-    celda.textContent = fecha;
+  const celdaHora = document.createElement("div");
+  celdaHora.classList.add("hora");
+  celdaHora.textContent = "Hora";
+  filaHeader.appendChild(celdaHora);
+
+  fechasTurno.forEach(fecha => {
+    const celdaDia = document.createElement("div");
+    celdaDia.classList.add("dia");
+    celdaDia.textContent = fecha;
+    filaHeader.appendChild(celdaDia);
   });
 
-  const todasLasHoras = new Set();
-  fechas.forEach(f => {
-    Object.keys(cronogramaPorDia[f]).forEach(h => todasLasHoras.add(h));
-  });
-  const horasOrdenadas = Array.from(todasLasHoras).sort((a, b) => {
-    const convertir = h => {
-      const [h12, suf] = h.split(" ");
-      let [hnum, min] = h12.split(":");
-      if (!min) min = "00";
-      let n = parseInt(hnum, 10);
-      if (suf === "p.m." && n !== 12) n += 12;
-      if (suf === "a.m." && n === 12) n = 0;
-      return n * 60 + parseInt(min, 10);
-    };
-    return convertir(a) - convertir(b);
-  });
+  cronograma.appendChild(filaHeader);
+}
 
-  horasOrdenadas.forEach(hora => {
-    const fila = tabla.insertRow();
-    fila.insertCell().textContent = hora;
-    fechas.forEach(fecha => {
-      const celda = fila.insertCell();
-      celda.textContent = cronogramaPorDia[fecha][hora] || "";
-      celda.classList.add("celda-interactiva");
+function crearFilasCronograma() {
+  horasDelDia.forEach(hora => {
+    const fila = document.createElement("div");
+    fila.classList.add("fila");
+
+    const celdaHora = document.createElement("div");
+    celdaHora.classList.add("hora");
+    celdaHora.textContent = hora;
+    fila.appendChild(celdaHora);
+
+    fechasTurno.forEach(fecha => {
+      const celda = document.createElement("div");
+      celda.classList.add("bloque");
+
+      const tareas = tareasPorHora[hora];
+      if (tareas && tareas.length > 0) {
+        const lista = document.createElement("ul");
+        tareas.forEach(tarea => {
+          const item = document.createElement("li");
+          item.textContent = tarea;
+          lista.appendChild(item);
+        });
+        celda.appendChild(lista);
+      }
+
       celda.addEventListener("click", () => {
         celda.classList.toggle("completado");
       });
+
+      fila.appendChild(celda);
     });
+
+    cronograma.appendChild(fila);
   });
 }
 
-document.addEventListener("DOMContentLoaded", generarTabla);
-  "Jueves 07/08": {
-    "07:00 a.m.": "Llegada, desayuno personal, bajar a Rosa",
-    "08:00 a.m.": "Desayuno a residentes, huevo a Cecilia (revuelto), a Adelina (sancochado)",
-    "08:15 a.m.": "Chata y cambio de pañal a Adelina",
-    "09:00 a.m.": "Cambio de pañal si no hay baño",
-    "10:00 a.m.": "Baño a Cecilia",
-    "11:30 a.m.": "Pedir dieta Adelina y segundo especial Cecilia",
-    "12:00 p.m.": "Almuerzo (Cecilia sopa en vaso)",
-    "03:00 p.m.": "Dar comida licuada a Dora",
-    "05:00 p.m.": "Cena",
-    "07:00 p.m.": "2 puffs y lágrimas a Adelina, oxígeno a Dora",
-    "08:15 p.m.": "Chata y pañal a Adelina",
-    "10:00 p.m.": "Luces apagadas, descanso"
-  },
-  "Viernes 08/08": {
-    "12:00 a.m.": "Rondas",
-    "04:00 a.m.": "Cambio de pañal Dilma, lavado Adelina y Dora",
-    "04:30 a.m.": "Signos vitales Adelina, Iris, Dilma y paciente frente",
-    "06:00 a.m.": "Baño personal, sacar basura",
-    "07:00 a.m.": "Desayuno personal, bajar a Rosa",
-    "08:00 a.m.": "Desayuno residentes",
-    "08:15 a.m.": "Pañal y chata Adelina",
-    "09:30 a.m.": "Baño a Adelina",
-    "10:30 a.m.": "Baño a Dilma o Iris (turno alternado)",
-    "11:30 a.m.": "Pedir dieta y segundo",
-    "12:00 p.m.": "Almuerzo",
-    "03:00 p.m.": "Dar comida licuada a Dora",
-    "05:00 p.m.": "Cena",
-    "08:15 p.m.": "Chata y pañal Adelina",
-    "10:00 p.m.": "Luces apagadas"
-  },
-  "Lunes 11/08": {
-    "07:00 a.m.": "Llegada, desayuno personal",
-    "08:00 a.m.": "Desayuno residentes",
-    "08:15 a.m.": "Chata y pañal Adelina",
-    "09:00 a.m.": "Cambio pañal Adelina si no hay baño",
-    "10:00 a.m.": "Baño a Cecilia",
-    "11:30 a.m.": "Pedir dieta y segundo",
-    "12:00 p.m.": "Almuerzo",
-    "03:00 p.m.": "Dar comida licuada a Dora",
-    "05:00 p.m.": "Cena",
-    "07:00 p.m.": "2 puffs y lágrimas Adelina",
-    "08:15 p.m.": "Chata y pañal Adelina",
-    "10:00 p.m.": "Luces apagadas"
-  },
-  "Martes 12/08": {
-    "12:00 a.m.": "Revisión pacientes",
-    "04:00 a.m.": "Lavado y pañal Adelina, Dora; Dilma",
-    "04:30 a.m.": "Signos vitales (Adelina, Dilma, Iris, otra)",
-    "06:00 a.m.": "Baño personal, sacar basura",
-    "07:00 a.m.": "Desayuno personal, bajar Rosa",
-    "08:00 a.m.": "Desayuno residentes",
-    "08:15 a.m.": "Chata y pañal Adelina",
-    "09:30 a.m.": "Baño a Adelina (martes)",
-    "10:30 a.m.": "Baño a Iris o Dilma (según turno)",
-    "11:30 a.m.": "Pedir dieta y segundo",
-    "12:00 p.m.": "Almuerzo",
-    "03:00 p.m.": "Dar comida licuada a Dora",
-    "05:00 p.m.": "Cena",
-    "08:15 p.m.": "Chata y pañal Adelina",
-    "10:00 p.m.": "Luces apagadas"
-  },
-  "Viernes 15/08": {
-    "07:00 a.m.": "Inicio de turno, desayuno personal",
-    "08:00 a.m.": "Desayuno residentes",
-    "08:15 a.m.": "Pañal y chata Adelina",
-    "09:30 a.m.": "Baño a Adelina (viernes)",
-    "10:30 a.m.": "Baño a Cecilia",
-    "11:30 a.m.": "Pedir dieta Adelina y 2do Cecilia",
-    "12:00 p.m.": "Almuerzo",
-    "03:00 p.m.": "Dar comida licuada a Dora",
-    "05:00 p.m.": "Cena",
-    "08:15 p.m.": "Pañal Adelina",
-    "10:00 p.m.": "Luces apagadas"
-  },
-  "Sábado 16/08": {
-    "12:00 a.m.": "Rondas generales",
-    "04:00 a.m.": "Cambio de pañal y lavado a Dora, Adelina y Dilma",
-    "04:30 a.m.": "Signos vitales 4 pacientes",
-    "06:00 a.m.": "Baño personal, basura",
-    "07:00 a.m.": "Desayuno personal, bajar Rosa",
-    "08:00 a.m.": "Desayuno residentes",
-    "08:15 a.m.": "Pañal y chata Adelina",
-    "10:30 a.m.": "Baño a Iris o Dilma (alternado)",
-    "11:30 a.m.": "Pedir dieta y segundo",
-    "12:00 p.m.": "Almuerzo",
-    "03:00 p.m.": "Comida Dora",
-    "05:00 p.m.": "Cena",
-    "08:15 p.m.": "Chata Adelina",
-    "10:00 p.m.": "Luces apagadas"
-  }
+crearEncabezado();
+crearFilasCronograma();
