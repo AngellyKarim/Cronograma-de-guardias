@@ -1,0 +1,59 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff0f5;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  transition: background-color 0.3s;
+}
+.dark-mode {
+  background-color: #2d2d2d;
+  color: #fff;
+}
+.contenedor {
+  max-width: 100%;
+  overflow-x: auto;
+}
+h1 {
+  text-align: center;
+  color: #c45ca4;
+}
+#cronograma-table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+#cronograma-table th,
+#cronograma-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+  min-width: 120px;
+}
+#cronograma-table th {
+  background-color: #ffe0f0;
+}
+.hora {
+  font-weight: bold;
+  background-color: #f8d7ff;
+}
+.tarea {
+  background-color: #e0f7fa;
+  margin: 4px 0;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.tarea:hover {
+  background-color: #d0eaff;
+  transform: scale(1.02);
+}
+.tachado {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+.resaltado {
+  outline: 2px solid #c45ca4;
+}
