@@ -6,13 +6,13 @@ const fechasTurno = [
 ];
 
 const horasDelDia = [
-  "12 a.m", "1 a.m", "2 a.m", "3 a.m", "4 a.m", "5 a.m", "6 a.m",
-  "7 a.m", "8 a.m", "9 a.m", "10 a.m", "11 a.m",
-  "12 p.m", "1 p.m", "2 p.m", "3 p.m", "4 p.m", "5 p.m", "6 p.m",
-  "7 p.m", "8 p.m", "9 p.m", "10 p.m", "11 p.m"
+  "4 a.m", "5 a.m", "6 a.m", "7 a.m", "8 a.m", "9 a.m", "9:30 a.m",
+  "10 a.m", "11 a.m", "11:30 a.m", "12 p.m", "1 p.m", "2 p.m",
+  "3 p.m", "4 p.m", "5 p.m", "6 p.m", "7 p.m", "8 p.m", "9 p.m",
+  "10 p.m", "12 a.m", "1 a.m", "2 a.m", "3 a.m"
 ];
 
-const tareasPorHora = {
+const tareasGenerales = {
   "4 a.m": [
     "Cambio de pañal a Dilma",
     "Lavado perineal y cambio de pañal a Dora",
@@ -25,8 +25,7 @@ const tareasPorHora = {
     "Revisar entorno segundo piso"
   ],
   "6 a.m": [
-    "Bañarme y alistarme para el día",
-    "Preparar ropa de trabajo"
+    "Bañarme y alistarme para el día"
   ],
   "7 a.m": [
     "Dejar mis cosas",
@@ -36,18 +35,15 @@ const tareasPorHora = {
   ],
   "8 a.m": [
     "Preparar desayunos",
-    "Servir desayuno a residentes",
+    "Servir desayuno",
     "Desayuno especial para Adelina y Cecilia",
     "Cambio de pañal y chata a Adelina si deposición"
   ],
   "9 a.m": [
-    "Cambio de pañal a Adelina si no se le baña",
+    "Cambio de pañal a Adelina si no se baña",
     "Dar licuado a Dora",
     "Bañar a Cecilia",
-    "Bañar a Iris o Dilma alternadamente si no es día de Adelina"
-  ],
-  "9:30 a.m": [
-    "Bañar a Adelina (solo martes y viernes)"
+    "Bañar a Iris o Dilma (alternados)"
   ],
   "10 a.m": [
     "Terminar baños",
@@ -56,8 +52,7 @@ const tareasPorHora = {
   "11 a.m": [
     "Dar merienda",
     "Ayudar a servir jugos",
-    "Alistar almuerzo",
-    "Preguntar si Iris y Dilma desean bajar"
+    "Preguntar a Iris y Dilma si desean bajar"
   ],
   "11:30 a.m": [
     "Pedir dieta especial para Cecilia",
@@ -67,35 +62,28 @@ const tareasPorHora = {
   "12 p.m": [
     "Servir almuerzo",
     "Servir sopa en vaso a Cecilia",
-    "Dar comida a pacientes que almuerzan en cama"
+    "Dar comida a quienes almuerzan en cama"
   ],
   "1 p.m": [
     "Almuerzo personal",
     "Llevar a Rosa al baño",
     "Colocar a Rosa en el sillón"
   ],
-  "2 p.m": [
-    "Descanso breve"
-  ],
   "3 p.m": [
     "Dar comida licuada a Dora"
   ],
   "4 p.m": [
-    "Empezar preparación de cena",
-    "Revisión del entorno segundo piso"
+    "Preparar cena",
+    "Revisión del segundo piso"
   ],
   "5 p.m": [
-    "Servir la cena",
+    "Servir cena",
     "Colocar pañal a Rosa",
-    "Aplicar gaseobet, lágrimas, timolol, mentol a Rosa"
-  ],
-  "6 p.m": [
-    "Acompañar a pacientes a sus cuartos",
-    "Revisión general"
+    "Aplicar gaseobet, timolol, lágrimas y mentol a Rosa"
   ],
   "7 p.m": [
-    "2 puffs y lágrimas artificiales a Adelina",
-    "Colocar oxígeno (balón) 2% a Adelina"
+    "2 puffs y lágrimas a Adelina",
+    "Colocar oxígeno a Adelina (balón al 2%)"
   ],
   "8 p.m": [
     "Cambio de pañal y chata a Adelina si deposición"
@@ -108,18 +96,25 @@ const tareasPorHora = {
     "Apagar luces",
     "Descansar hasta las 12 a.m"
   ],
-  "12 a.m": [
-    "Revisión general de pacientes"
-  ],
-  "1 a.m": [
-    "Revisión general"
-  ],
-  "2 a.m": [
-    "Revisión general"
-  ],
-  "3 a.m": [
-    "Revisión general"
-  ]
+  "12 a.m": ["Revisión general"],
+  "1 a.m": ["Revisión general"],
+  "2 a.m": ["Revisión general"],
+  "3 a.m": ["Revisión general"]
+};
+
+const tareasPorDiaYHora = {
+  "Mar 5 ago": {
+    "9:30 a.m": ["Bañar a Adelina"]
+  },
+  "Vie 8 ago": {
+    "9:30 a.m": ["Bañar a Adelina"]
+  },
+  "Mar 12 ago": {
+    "9:30 a.m": ["Bañar a Adelina"]
+  },
+  "Vie 15 ago": {
+    "9:30 a.m": ["Bañar a Adelina"]
+  }
 };
 const cronograma = document.getElementById("cronograma");
 
@@ -156,10 +151,14 @@ function crearFilasCronograma() {
       const celda = document.createElement("div");
       celda.classList.add("bloque");
 
-      const tareas = tareasPorHora[hora];
-      if (tareas && tareas.length > 0) {
+      const tareasEspecificas = tareasPorDiaYHora[fecha]?.[hora] || [];
+      const tareasGeneralesEnHora = tareasGenerales[hora] || [];
+
+      const todasLasTareas = [...tareasGeneralesEnHora, ...tareasEspecificas];
+
+      if (todasLasTareas.length > 0) {
         const lista = document.createElement("ul");
-        tareas.forEach(tarea => {
+        todasLasTareas.forEach(tarea => {
           const item = document.createElement("li");
           item.textContent = tarea;
           lista.appendChild(item);
